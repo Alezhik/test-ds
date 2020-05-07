@@ -5,11 +5,13 @@ export const setToken = (key, token) => {
 
 export const getToken = (key, delay) => {
   const object = JSON.parse(localStorage.getItem(key));
-  const dateString = object.timestamp;
-  const now = new Date().getTime().toString();
+  if (object) {
+    const dateString = object.timestamp;
+    const now = new Date().getTime().toString();
 
-  if (now - dateString < delay * 1000) {
-    return object.token;
+    if (now - dateString < delay * 1000) {
+      return object.token;
+    }
   }
   return false;
 };
